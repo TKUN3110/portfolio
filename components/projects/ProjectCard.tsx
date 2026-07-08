@@ -68,7 +68,22 @@ export default function ProjectCard({ project, scrollYProgress, delay = 0, index
         <Roller isTop={true} />
 
         {/* Unrolling Paper */}
-        <motion.div style={{ height: paperHeight }} className="paper">
+        <motion.div 
+          style={{ 
+            height: paperHeight,
+            width: '90%',
+            position: 'relative',
+            backgroundColor: 'var(--parchment)',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            boxShadow: 'inset 3px 0 8px rgba(0,0,0,0.04), inset -3px 0 8px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.12)',
+            willChange: 'height',
+            zIndex: 2,
+          }}
+          className="paper"
+        >
           {/* Deckled left edge */}
           <svg viewBox="0 0 100 100" preserveAspectRatio="none"
             style={{ position: 'absolute', left: -9, top: 0, bottom: 0, width: 10, height: '100%', zIndex: 4, pointerEvents: 'none' }}>
@@ -203,18 +218,6 @@ export default function ProjectCard({ project, scrollYProgress, delay = 0, index
           align-items: center;
           width: 100%;
           max-width: 360px;
-        }
-        .paper {
-          width: 90%;
-          position: relative;
-          background-color: var(--parchment);
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          box-shadow: inset 3px 0 8px rgba(0,0,0,0.04), inset -3px 0 8px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.12);
-          will-change: height;
-          z-index: 2;
         }
       `}</style>
     </div>
