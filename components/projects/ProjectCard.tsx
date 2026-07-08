@@ -56,7 +56,7 @@ export default function ProjectCard({ project, scrollYProgress, delay = 0, index
   const year = projectYears[project.id] ?? '2026';
 
   // Map the parent's scroll progress (0.1 to 0.75) to a height in pixels
-  const paperHeight = useTransform(scrollYProgress, [0.1, 0.75], ["0px", "420px"]);
+  const paperHeight = useTransform(scrollYProgress, [0.1, 0.75], ["0px", "480px"]);
   const contentOpacity = useTransform(scrollYProgress, [0.3, 0.75], [0, 1]);
   const tassleOpacity = useTransform(scrollYProgress, [0.4, 0.75], [0, 1]);
 
@@ -104,7 +104,7 @@ export default function ProjectCard({ project, scrollYProgress, delay = 0, index
           {/* Content Wrapper */}
           <motion.div
             style={{
-              height: '420px',
+              height: '480px',
               width: '100%',
               padding: '24px 18px 28px',
               display: 'flex',
@@ -138,7 +138,7 @@ export default function ProjectCard({ project, scrollYProgress, delay = 0, index
             <div style={{ width: '100%', height: 1, background: 'linear-gradient(90deg, transparent, rgba(28,28,28,0.12), transparent)', margin: '8px 0' }} />
 
             {/* Description */}
-            <p style={{ fontSize: '12.5px', lineHeight: '1.65', color: 'var(--charcoal-light)', opacity: 0.88, flexGrow: 1, marginBottom: '12px', overflowY: 'auto' }}>
+            <p style={{ fontSize: '12.5px', lineHeight: '1.65', color: 'var(--charcoal-light)', opacity: 0.88, flexGrow: 1, marginBottom: '12px', overflowY: 'hidden' }}>
               {project.description}
             </p>
 
@@ -206,7 +206,7 @@ export default function ProjectCard({ project, scrollYProgress, delay = 0, index
       <style jsx>{`
         .card-wrapper {
           width: 100%;
-          min-height: 480px;
+          min-height: 540px;
           display: flex;
           justify-content: center;
           align-items: center;
