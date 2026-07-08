@@ -29,8 +29,7 @@ export default function Projects() {
         />
 
         <div
-          className="projects-list"
-          style={{ display: 'flex', flexDirection: 'column', gap: '0px', marginTop: '40px' }}
+          className="projects-grid"
         >
           {projectsData.map((project, index) => (
             <ProjectCard
@@ -42,6 +41,28 @@ export default function Projects() {
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .projects-grid {
+          display: grid;
+          gap: 24px;
+          margin-top: 40px;
+          align-items: start;
+          grid-template-columns: 1fr;
+        }
+        @media (min-width: 640px) {
+          .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+          }
+        }
+        @media (min-width: 1024px) {
+          .projects-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+          }
+        }
+      `}</style>
     </section>
   );
 }
