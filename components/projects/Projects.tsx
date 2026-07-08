@@ -20,13 +20,13 @@ export default function Projects() {
     <section
       id="projects"
       ref={containerRef}
+      className="projects-section"
       style={{
         backgroundColor: 'var(--parchment)',
         backgroundImage: 'radial-gradient(circle at 90% 10%, rgba(226, 222, 201, 0.25) 0%, transparent 60%)',
         position: 'relative',
         zIndex: 5,
         width: '100%',
-        height: '150vh', // Determines the scroll distance for unrolling
       }}
     >
       <div className="sticky-viewport">
@@ -54,6 +54,9 @@ export default function Projects() {
       </div>
 
       <style jsx>{`
+        .projects-section {
+          height: 150vh;
+        }
         .sticky-viewport {
           position: sticky;
           top: 0;
@@ -72,6 +75,17 @@ export default function Projects() {
           align-items: center;
           grid-template-columns: 1fr;
           width: 100%;
+        }
+        @media (max-width: 1023px) {
+          .projects-section {
+            height: auto !important;
+          }
+          .sticky-viewport {
+            position: relative !important;
+            height: auto !important;
+            padding: 60px 0 !important;
+            overflow: visible !important;
+          }
         }
         @media (min-width: 640px) {
           .projects-grid {

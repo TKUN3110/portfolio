@@ -55,13 +55,34 @@ export default function ProjectCard({ project, scrollYProgress, delay = 0, index
   const kanji = siteConfig.kanji?.projectCards?.[project.id] ?? siteConfig.kanji?.projectsKanji ?? { text: '作', translation: 'Create' };
   const year = projectYears[project.id] ?? '2026';
 
-  // Map the parent's scroll progress (0.1 to 0.75) to a height in pixels
-  const paperHeight = useTransform(scrollYProgress, [0.1, 0.75], ["0px", "480px"]);
-  const contentOpacity = useTransform(scrollYProgress, [0.3, 0.75], [0, 1]);
-  const tassleOpacity = useTransform(scrollYProgress, [0.4, 0.75], [0, 1]);
+  const [isMobile, setIsMobile] = React.useState(false);
+  
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const localRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll progress as the card enters the viewport (used on mobile)
+  const { scrollYProgress: localScroll } = useScroll({
+    target: localRef,
+    offset: ["start 0.92", "start 0.6"]
+  });
+
+  const activeScroll = isMobile ? localScroll : scrollYProgress;
+
+  // Map the scroll progress to a height in pixels
+  const paperHeight = useTransform(activeScroll, [0.1, 0.75], ["0px", "480px"]);
+  const contentOpacity = useTransform(activeScroll, [0.3, 0.75], [0, 1]);
+  const tassleOpacity = useTransform(activeScroll, [0.4, 0.75], [0, 1]);
 
   return (
-    <div className="card-wrapper">
+    <div ref={localRef} className="card-wrapper">
       <div className="scroll-assembly">
         
         {/* Top Wooden Roller */}

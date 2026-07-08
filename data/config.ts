@@ -55,7 +55,7 @@ export const siteConfig = {
   // Comment out or delete a line to hide that element.
   kanji: {
 
-    navLogo: { text: '', translation: 'Flower Wind (Branding logo)' },
+    navLogo: { text: '', translation: '' },
     // navStamp: { text: '', translation: 'Artisan (Hanko seal)' },
     heroStamp: { text: '履歴書', translation: 'Resume / CV' },
     heroBlossom: { text: '咲', translation: 'Bloom / Blossom' },
