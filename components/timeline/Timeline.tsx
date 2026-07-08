@@ -58,8 +58,8 @@ export default function Timeline() {
             gap: '0px',
           }}
         >
-          {/* Center branch line SVG */}
-          <div className="timeline-branch-svg-container" style={{ pointerEvents: 'none' }}>
+          {/* Desktop branch line SVG (Alternating twigs) */}
+          <div className="timeline-branch-svg-container desktop-only" style={{ pointerEvents: 'none' }}>
             <svg viewBox="0 0 100 1200" preserveAspectRatio="none" className="timeline-branch-svg">
               <motion.path
                 d="M50,0 Q60,150 40,300 T60,600 T40,900 Q50,1050 50,1200"
@@ -105,6 +105,53 @@ export default function Timeline() {
             </svg>
           </div>
 
+          {/* Mobile branch line SVG (All twigs pointing right to connect with cards) */}
+          <div className="timeline-branch-svg-container mobile-only" style={{ pointerEvents: 'none' }}>
+            <svg viewBox="0 0 100 1200" preserveAspectRatio="none" className="timeline-branch-svg">
+              <motion.path
+                d="M50,0 Q60,150 40,300 T60,600 T40,900 Q50,1050 50,1200"
+                fill="none"
+                stroke="var(--charcoal)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                style={{ opacity: 0.8, pathLength: centerPathLength }}
+              />
+              {/* Branch twigs extending right to milestones */}
+              {/* Twig 1 (Node 0, right) */}
+              <motion.path
+                d="M52,150 Q75,155 90,165"
+                fill="none"
+                stroke="var(--charcoal)"
+                strokeWidth="2.2"
+                style={{ opacity: 0.75, pathLength: twig1PathLength }}
+              />
+              {/* Twig 2 (Node 1, right) */}
+              <motion.path
+                d="M52,450 Q75,455 90,465"
+                fill="none"
+                stroke="var(--charcoal)"
+                strokeWidth="2.2"
+                style={{ opacity: 0.75, pathLength: twig2PathLength }}
+              />
+              {/* Twig 3 (Node 2, right) */}
+              <motion.path
+                d="M52,750 Q75,755 90,765"
+                fill="none"
+                stroke="var(--charcoal)"
+                strokeWidth="2.2"
+                style={{ opacity: 0.75, pathLength: twig3PathLength }}
+              />
+              {/* Twig 4 (Node 3, right) */}
+              <motion.path
+                d="M52,1050 Q75,1055 90,1065"
+                fill="none"
+                stroke="var(--charcoal)"
+                strokeWidth="2.2"
+                style={{ opacity: 0.75, pathLength: twig4PathLength }}
+              />
+            </svg>
+          </div>
+
           <div style={{ position: 'relative', zIndex: 2 }}>
             {timelineData.map((item, index) => (
               <TimelineItem
@@ -132,10 +179,22 @@ export default function Timeline() {
           width: 100%;
           height: 100%;
         }
+        .desktop-only {
+          display: block;
+        }
+        .mobile-only {
+          display: none;
+        }
         @media (max-width: 767px) {
           .timeline-branch-svg-container {
             left: 20px !important;
             transform: translateX(-50%) !important;
+          }
+          .desktop-only {
+            display: none !important;
+          }
+          .mobile-only {
+            display: block !important;
           }
         }
       `}</style>
