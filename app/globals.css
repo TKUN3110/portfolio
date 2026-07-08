@@ -1,0 +1,265 @@
+/* Reset & Global styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --parchment: #F7F2E8;
+  --parchment-dark: #ECE7DC;
+  --charcoal: #171717;
+  --charcoal-light: #333333;
+  --charcoal-fade: rgba(23, 23, 23, 0.08);
+  --crimson: #B22234;
+  --crimson-hover: #D94F70;
+  --crimson-fade: rgba(178, 34, 52, 0.1);
+  --sakura: #D94F70;
+  --sakura-glow: rgba(217, 79, 112, 0.2);
+  --accent-gold: #C9A227;
+  
+  --font-serif: 'Cormorant Garamond', 'Noto Serif JP', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  --paper-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--parchment);
+  color: var(--charcoal);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--parchment-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--charcoal);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--crimson);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--charcoal);
+}
+
+/* Selection Color */
+::selection {
+  background-color: var(--crimson-fade);
+  color: var(--crimson);
+}
+
+/* Calligraphy & Ink Strokes */
+.ink-stroke {
+  position: relative;
+  display: inline-block;
+}
+
+.ink-stroke::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: var(--charcoal);
+  clip-path: polygon(0% 20%, 15% 0%, 35% 40%, 65% 10%, 85% 60%, 100% 30%, 98% 70%, 80% 50%, 60% 90%, 30% 40%, 10% 80%);
+  opacity: 0.85;
+}
+
+/* Enso Ring (Calligraphy Brush Circle) */
+.enso-ring {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 8px solid transparent;
+  border-top-color: var(--charcoal);
+  border-right-color: var(--charcoal);
+  border-left-color: var(--charcoal);
+  transform: rotate(-45deg);
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enso-ring::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  border: 1px solid var(--charcoal);
+  opacity: 0.15;
+}
+
+/* Red Seal Stamps (Hanko) */
+.red-stamp {
+  font-family: var(--font-serif);
+  background: var(--crimson);
+  color: var(--parchment);
+  border: 2px solid var(--crimson);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 2px rgba(255,255,255,0.4), 0 2px 4px rgba(0,0,0,0.05);
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  user-select: none;
+}
+
+.red-stamp-circle {
+  font-family: var(--font-serif);
+  width: 44px;
+  height: 44px;
+  background: var(--crimson);
+  color: var(--parchment);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: inset 0 0 3px rgba(255,255,255,0.5);
+}
+
+/* Animations */
+@keyframes sway {
+  0% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  100% { transform: rotate(-5deg); }
+}
+
+.animate-sway {
+  animation: sway 6s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes ink-fade {
+  from { opacity: 1; transform: scale(1); filter: blur(0); }
+  to { opacity: 0; transform: scale(1.5); filter: blur(4px); }
+}
+
+.ink-trail {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--charcoal);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  animation: ink-fade 0.8s ease-out forwards;
+}
+
+/* Paper Card borders */
+.washi-border {
+  border: 1px solid var(--charcoal-fade);
+  background-color: var(--parchment);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.washi-border::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px dashed rgba(28, 28, 28, 0.15);
+  pointer-events: none;
+}
+
+.washi-border:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(28, 28, 28, 0.05);
+  border-color: rgba(28, 28, 28, 0.2);
+}
+
+/* Ink Brush Buttons */
+.brush-btn {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--parchment);
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 12px 28px;
+  z-index: 1;
+}
+
+/* Navigation indicators */
+.nav-link {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--charcoal);
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--crimson);
+}
+
+/* Textures & Images fallback */
+.watercolor-wash {
+  background-image: radial-gradient(circle at 70% 30%, rgba(226, 222, 201, 0.4) 0%, transparent 70%);
+}
+
+.watercolor-cherry {
+  background-image: radial-gradient(circle at 10% 80%, rgba(232, 143, 143, 0.15) 0%, transparent 60%);
+}
+
+/* Helper spacing */
+.section-padding {
+  padding: 100px 24px;
+}
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 60px 16px;
+  }
+}
