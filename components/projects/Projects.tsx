@@ -29,8 +29,8 @@ export default function Projects() {
         />
 
         <div
-          className="projects-grid"
-          style={{ display: 'grid', gap: '32px', marginTop: '40px', alignItems: 'start' }}
+          className="projects-list"
+          style={{ display: 'flex', flexDirection: 'column', gap: '0px', marginTop: '40px' }}
         >
           {projectsData.map((project, index) => (
             <ProjectCard
@@ -42,12 +42,6 @@ export default function Projects() {
           ))}
         </div>
       </div>
-
-      <style jsx global>{`
-        .projects-grid { grid-template-columns: 1fr; }
-        @media (min-width: 640px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); } }
-      `}</style>
     </section>
   );
 }
